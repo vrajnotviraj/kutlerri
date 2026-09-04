@@ -82,7 +82,23 @@ function loadBundle(file) {
   return { abs, lines, template: JSON.parse(lines[TEMPLATE_LINE]) };
 }
 
-function writeBundle(bundle, template) {
+function writeBundle(bundle, template, spec = null) {
+  if (spec) {
+    const headEnd = bundle.lines.findIndex((line, index) =>
+      index < TEMPLATE_LINE && line.trim() === '</head>'
+    );
+    const titleLine = bundle.lines.findIndex((line, index) =>
+      index < headEnd && /<title>.*<\/title>/.test(line)
+    );
+    if (headEnd === -1 || titleLine === -1) {
+      throw new Error(`${spec.file}: no crawler-visible outer head/title`);
+    }
+
+    // Keep this on one physical line so the self-extracting bundle's fixed
+    // template line does not move. Crawlers read this head without JavaScript.
+    bundle.lines[titleLine] = `  ${pageMetadata(spec).replace(/\n/g, '')}`;
+  }
+
   // Escaping every `<` stops a literal </script> from closing the wrapper tag.
   bundle.lines[TEMPLATE_LINE] = JSON.stringify(template).replace(/</g, '\\u003C');
   fs.writeFileSync(bundle.abs, bundle.lines.join('\n'));
@@ -111,44 +127,12 @@ function escapeHtml(value) {
     .replace(/"/g, '&quot;');
 }
 
-// ---------------------------------------------------------------------------
-// Composition
-// ---------------------------------------------------------------------------
-
-function navFor(current) {
-  if (!current) return NAV;
-  return NAV.replace(`data-nav="${current}"`, `data-nav="${current}" aria-current="page"`);
-}
-
-function page(bundle, spec) {
-  const body = read(spec.file.replace('.html', '.body.html'));
-  const logic = read(spec.file.replace('.html', '.logic.js'));
-
-  // Page-scoped CSS, optional. Keeps assets only this page renders out of the
-  // other three bundles.
-  const extraPath = path.join(SRC, spec.file.replace('.html', '.css'));
-  const extra = fs.existsSync(extraPath) ? '\n' + fs.readFileSync(extraPath, 'utf8') : '';
-
-  const motion = spec.file === 'index.html'
-    ? '<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>\n<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>'
-    : '';
-
+function pageMetadata(spec) {
   const pageUrl = `${SITE_URL}${spec.path}`;
   const title = escapeHtml(spec.title);
   const description = escapeHtml(spec.description);
 
-  return `<!DOCTYPE html>
-<html><head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-${runtimeTag(bundle.template, spec.file)}
-${motion}
-
-</head>
-<body>
-<x-dc>
-<helmet>
-<title>${title}</title>
+  return `<title>${title}</title>
 <meta name="description" content="${description}">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:type" content="website">
@@ -171,7 +155,43 @@ ${motion}
 <link rel="canonical" href="${pageUrl}">
 <link rel="alternate" type="text/markdown" href="${SITE_URL}/llms.txt" title="Kutlerri AI summary">
 <link rel="alternate" type="text/markdown" href="${SITE_URL}/ai-context.md" title="Kutlerri AI product context">
-<link rel="sitemap" type="application/xml" href="${SITE_URL}/sitemap.xml">
+<link rel="sitemap" type="application/xml" href="${SITE_URL}/sitemap.xml">`;
+}
+
+// ---------------------------------------------------------------------------
+// Composition
+// ---------------------------------------------------------------------------
+
+function navFor(current) {
+  if (!current) return NAV;
+  return NAV.replace(`data-nav="${current}"`, `data-nav="${current}" aria-current="page"`);
+}
+
+function page(bundle, spec) {
+  const body = read(spec.file.replace('.html', '.body.html'));
+  const logic = read(spec.file.replace('.html', '.logic.js'));
+
+  // Page-scoped CSS, optional. Keeps assets only this page renders out of the
+  // other three bundles.
+  const extraPath = path.join(SRC, spec.file.replace('.html', '.css'));
+  const extra = fs.existsSync(extraPath) ? '\n' + fs.readFileSync(extraPath, 'utf8') : '';
+
+  const motion = spec.file === 'index.html'
+    ? '<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>\n<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>'
+    : '';
+
+  return `<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+${runtimeTag(bundle.template, spec.file)}
+${motion}
+
+</head>
+<body>
+<x-dc>
+<helmet>
+${pageMetadata(spec)}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 ${fontBlock(bundle.template, spec.file)}
@@ -249,7 +269,7 @@ for (const spec of PAGES) {
   const bundle = loadBundle(spec.file);
   const template = page(bundle, spec);
   guard(template, spec.file);
-  writeBundle(bundle, template);
+  writeBundle(bundle, template, spec);
   console.log(`  ${spec.file.padEnd(16)} ${template.length} bytes`);
   count++;
 }
