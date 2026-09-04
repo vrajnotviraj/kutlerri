@@ -94,7 +94,7 @@ class Component extends DCLogic {
   renderVals() {
     // --- FAQ ---------------------------------------------------------------
     const faqData = [
-      ["What exactly is an AI agent?", "Software that owns one job end to end. It pulls the data, works out what to do, prepares the recommendation, and where you allow it, carries out the routine steps."],
+      ["Will my team have to learn new software?", "No. Kutlerri is fully managed. Your team sees the decisions that need judgment, the dollars attached to them and the measured result. We handle the agents and systems behind that."],
       ["Does Kutlerri replace our POS?", "No. Your POS stays where it is. Kutlerri reads from it."],
       ["What systems does Kutlerri connect to?", "POS, delivery marketplaces, labor, inventory, reviews, accounting and catering tools. We confirm the exact connections during onboarding."],
       ["Does my team have to operate the agents?", "No. Recommendations arrive as decisions with a dollar amount attached. Most operators only touch approvals."],

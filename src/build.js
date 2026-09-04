@@ -32,8 +32,8 @@ const PAGES = [
     file: 'index.html',
     path: '/',
     nav: null,
-    title: 'Kutlerri, AI agents for restaurant P&amp;Ls',
-    description: 'Kutlerri finds revenue opportunities, cuts avoidable costs and helps execute the work across catering, food, labor and expansion. Built for multi-location restaurant operators.'
+    title: 'Kutlerri, the fully managed AI profit team for restaurant groups',
+    description: 'Kutlerri finds revenue and margin opportunities hiding across restaurant systems, then does the work to capture them without another dashboard for your team.'
   },
   {
     file: 'catering.html',
@@ -61,8 +61,8 @@ const PAGES = [
 // Retired routes. Kept as real files so inbound links and bookmarks land
 // somewhere useful instead of a 404.
 const REDIRECTS = [
-  { file: 'revenue.html', to: 'index.html#revenue', label: 'revenue agents' },
-  { file: 'margin.html', to: 'index.html#margin', label: 'margin agents' },
+  { file: 'revenue.html', to: 'index.html#outcomes', label: 'revenue outcomes' },
+  { file: 'margin.html', to: 'index.html#outcomes', label: 'margin outcomes' },
   { file: 'how-it-works.html', to: 'index.html#how', label: 'how Kutlerri works' },
   { file: 'get-a-demo.html', to: 'contact.html', label: 'the contact page' }
 ];
