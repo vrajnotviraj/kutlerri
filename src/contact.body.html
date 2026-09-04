@@ -1,0 +1,106 @@
+<main id="top">
+
+<!-- ===================================================================== -->
+<!-- One form, one intent. This page absorbs the old separate demo page, so  -->
+<!-- there is no longer a "book a demo" CTA competing with a "contact us"    -->
+<!-- CTA for the same click.                                                 -->
+<!-- ===================================================================== -->
+<section class="hero" style="align-items: start;">
+  <div>
+    <h1 class="h1">Let’s find the P&amp;L levers worth working on.</h1>
+    <p class="lede" style="margin-top: 24px;">Tell us the restaurant. We come back with what we would work on first and how we would measure it.</p>
+
+    <div class="stack" style="margin-top: 36px; gap: 0;">
+      <div class="day-event" style="border-top: 0; padding-top: 0;">
+        <p class="h4">Catering demand around your stores</p>
+        <p class="small">Who orders lunch near each location, and how much of it you are currently getting.</p>
+      </div>
+      <div class="day-event" style="margin-top: 18px;">
+        <p class="h4">Third-party spend contribution</p>
+        <p class="small">Which delivery promotions are paying for orders that lose money.</p>
+      </div>
+      <div class="day-event" style="margin-top: 18px;">
+        <p class="h4">Prep, waste and labor variance</p>
+        <p class="small">Where the same avoidable cost shows up week after week.</p>
+      </div>
+      <div class="day-event" style="margin-top: 18px;">
+        <p class="h4">What we would run, and how it is measured</p>
+        <p class="small">Including how our economics tie to the result.</p>
+      </div>
+    </div>
+
+    <div class="card card-tint" style="margin-top: 32px; max-width: 46ch;">
+      <p style="font-size: 17px; line-height: 1.45; color: var(--accent);">“+31% catering revenue over six months, and we never hired a catering rep.”</p>
+      <p class="small" style="margin-top: 12px; color: var(--accent);">RASA, multi-location fast casual</p>
+      <a href="catering.html#rasa" class="link-arrow" style="margin-top: 14px;">Read the story <span>&rarr;</span></a>
+    </div>
+  </div>
+
+  <div class="card" style="padding: clamp(24px, 3vw, 34px);">
+    <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+      <form sc-camel-on-submit="{{ submit }}" style="display: grid; gap: 18px;">
+        <div class="grid cols-2" style="gap: 18px;">
+          <div class="field">
+            <label for="c-first">First name</label>
+            <input id="c-first" name="first" type="text" autocomplete="given-name" required="">
+          </div>
+          <div class="field">
+            <label for="c-last">Last name</label>
+            <input id="c-last" name="last" type="text" autocomplete="family-name" required="">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="c-email">Work email</label>
+          <input id="c-email" name="email" type="email" autocomplete="email" required="">
+        </div>
+
+        <div class="field">
+          <label for="c-rest">Restaurant name</label>
+          <input id="c-rest" name="restaurant" type="text" autocomplete="organization" required="">
+        </div>
+
+        <div class="grid cols-2" style="gap: 18px;">
+          <div class="field">
+            <label for="c-loc">Locations</label>
+            <input id="c-loc" name="locations" type="text" inputmode="numeric">
+            <p class="hint">Roughly is fine.</p>
+          </div>
+          <div class="field">
+            <label for="c-reason">What is this about</label>
+            <sc-raw-select id="c-reason" name="reason">
+              <option>Finding profit opportunities</option>
+              <option>Catering specifically</option>
+              <option>Existing customer support</option>
+              <option>Partnership or integration</option>
+              <option>Careers</option>
+              <option>Press</option>
+            </sc-raw-select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="c-msg">Anything we should know</label>
+          <textarea id="c-msg" name="message" rows="4"></textarea>
+          <p class="hint">Optional.</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Find my opportunities</button>
+        <p class="small">No sales sequence before we have been useful. If you are an existing customer, your Kutlerri contact is still the fastest route.</p>
+      </form>
+    </sc-if>
+
+    <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+      <div style="animation: k-rise .3s ease-out both;">
+        <span class="chip chip-quiet">Demo form, not connected</span>
+        <p class="h3" style="margin-top: 18px;">This form is a UI mock.</p>
+        <p class="body" style="margin-top: 14px;">Nothing was submitted. Wire it to your CRM or scheduling tool and the confirmation and next available times would appear here.</p>
+        <button type="button" class="btn btn-ghost" style="margin-top: 22px;" sc-camel-on-click="{{ reset }}">Back to the form</button>
+      </div>
+    </sc-if>
+
+    <p class="note" style="margin-top: 20px;">Add a real support email, phone number and address before launch.</p>
+  </div>
+</section>
+
+</main>

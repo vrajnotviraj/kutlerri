@@ -1,0 +1,77 @@
+<main id="top">
+
+<!-- ===================================================================== -->
+<!-- Manifesto hero. A page whose whole job is the argument, so the type     -->
+<!-- carries it. Same sans display as every other page, no serif switch.     -->
+<!-- ===================================================================== -->
+<section class="hero" style="grid-template-columns: minmax(0, 1fr);">
+  <div class="narrow">
+    <h1 class="h1">Restaurants shouldn’t have to run on “I think.”</h1>
+    <p class="lede" style="margin-top: 26px; max-width: 40em;">Operators have more data than ever. POS, delivery, labor, inventory, reviews, the P&amp;L itself. Yet the most expensive decisions still end with “probably” and “let me check.”</p>
+    <p class="lede" style="margin-top: 18px; max-width: 40em; color: var(--ink);">Kutlerri exists to turn those signals into decisions, and the decisions into work that actually gets done.</p>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- Operating principles.                                                  -->
+<!-- ===================================================================== -->
+<section class="sec sunk">
+  <div class="wrap">
+    <h2 class="h2 head" data-reveal>How we operate.</h2>
+
+    <div class="lanes" style="margin-top: clamp(28px, 3.5vw, 44px); grid-template-columns: minmax(0, 1fr);">
+      <div class="lane">
+        <p class="h4">Start where the money is.</p>
+        <p class="small">Every agent has to create revenue or protect margin. If we cannot say what a job is worth before we build it, we do not build it.</p>
+      </div>
+      <div class="lane">
+        <p class="h4">A recommendation nobody executes is worth nothing.</p>
+        <p class="small">So we carry the work through, rather than handing over a report and hoping somebody finds time for it.</p>
+      </div>
+      <div class="lane">
+        <p class="h4">Operators keep the judgment.</p>
+        <p class="small">Software should not change your prices or your customer relationships on its own. People approve anything that moves real money.</p>
+      </div>
+      <div class="lane lane-mid">
+        <p class="h4">Say what is real.</p>
+        <p class="small">Catering is live. Everything else is in closely monitored beta with operator partners, and we label it that way on every page.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- Team. Roles only until there are real people and real photographs to    -->
+<!-- put here. Placeholder portraits would be worse than none.               -->
+<!-- ===================================================================== -->
+<section class="sec">
+  <div class="wrap">
+    <div class="narrow" data-reveal>
+      <h2 class="h2">The team.</h2>
+      <p class="body" style="margin-top: 20px;">A small group of people who have built restaurant software and run restaurant operations, which turn out to be very different skills.</p>
+    </div>
+
+    <!-- TODO: replace with real names, titles and portrait photographs, 4:5.
+         Until those exist, this section names the roles and nothing more. -->
+    <div class="pills" style="margin-top: 28px;">
+      <sc-for list="{{ roles }}" as="r" hint-placeholder-count="4">
+        <span class="pill">{{ r }}</span>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<section class="band" id="start">
+  <div class="wrap split" style="align-items: center;">
+    <div>
+      <h2 class="h2">Your P&amp;L already knows where the opportunities are.</h2>
+      <p class="body" style="margin-top: 18px;">Let us find the ones worth acting on, and tell you what we would start with.</p>
+    </div>
+    <div class="stack g16" style="justify-items: start;">
+      <a href="contact.html" class="btn btn-primary">Find my opportunities <span class="btn-orb" aria-hidden="true">&rarr;</span></a>
+      <p class="small" style="color: var(--panel-ink-2);">Built for groups of roughly three locations and up.</p>
+    </div>
+  </div>
+</section>

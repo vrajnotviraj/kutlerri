@@ -1,0 +1,227 @@
+<main id="top">
+
+<!-- ===================================================================== -->
+<!-- Hero. Same asymmetric split as the home page, so the two read as one    -->
+<!-- site. The asset here is the working demand map, because on this page    -->
+<!-- the map is the product rather than a decoration.                        -->
+<!-- ===================================================================== -->
+<section class="hero">
+  <div>
+    <h1 class="h1">Turn the businesses around every store into repeat catering revenue.</h1>
+    <p class="lede" style="margin-top: 24px;">Kutlerri maps the demand near your restaurants, finds the people who place the orders, and runs the outreach.</p>
+    <div class="hero-cta">
+      <a href="contact.html" class="btn btn-primary">Find my opportunities <span class="btn-orb" aria-hidden="true">&rarr;</span></a>
+      <a href="#funnel" class="btn btn-ghost">See the engine</a>
+    </div>
+  </div>
+
+  <div class="card" style="padding: 0; overflow: hidden;">
+    <div class="demo-bar">
+      <p class="h4">Demand map, Austin South</p>
+      <span class="chip">Live agent</span>
+    </div>
+
+    <div class="radar">
+      <span class="radar-ring" style="--d: 96px;"></span>
+      <span class="radar-ring" style="--d: 200px;"></span>
+      <span class="radar-ring" style="--d: 306px;"></span>
+      <span class="radar-home"></span>
+      <span class="radar-home-label">Your store</span>
+
+      <sc-for list="{{ pins }}" as="p" hint-placeholder-count="5">
+        <button type="button" class="radar-pin" style="left: {{ p.left }}; top: {{ p.top }};" aria-pressed="{{ p.on }}" sc-camel-on-click="{{ p.select }}">{{ p.name }}</button>
+      </sc-for>
+    </div>
+
+    <div style="padding: 20px; display: grid; gap: 14px;">
+      <div class="between">
+        <p class="h4">{{ sel.name }}</p>
+        <span class="{{ sel.chipClass }}">{{ sel.state }}</span>
+      </div>
+      <p class="body" style="font-size: 15px;">{{ sel.blurb }}</p>
+      <hr class="rule">
+      <div class="between">
+        <div>
+          <p class="small">Estimated first order</p>
+          <p class="num" style="font-size: 24px; color: var(--accent); margin-top: 2px;">{{ sel.value }}</p>
+        </div>
+        <p class="small">Pick any business on the map</p>
+      </div>
+    </div>
+
+    <p class="note" style="padding: 12px 20px; background: var(--surface-2); border-top: 1px solid var(--line);">Demo restaurant. Example figures.</p>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- The engine. Six stages named by what they do, laid out as a single      -->
+<!-- flowing rail rather than six identical metric cards.                    -->
+<!-- ===================================================================== -->
+<section class="sec sunk" id="funnel">
+  <div class="wrap">
+    <div class="narrow" data-reveal>
+      <h2 class="h2">Most catering software shows you an inbox. This builds the pipeline that fills it.</h2>
+      <p class="body" style="margin-top: 20px;">Six stages, running every week for every store. Kutlerri handles the repetition. Your team steps in where judgment or a relationship matters.</p>
+    </div>
+
+    <ol class="engine" style="margin-top: clamp(28px, 3.5vw, 44px);">
+      <sc-for list="{{ funnel }}" as="s" hint-placeholder-count="6">
+        <li class="engine-step">
+          <p class="h4">{{ s.name }}</p>
+          <p class="small">{{ s.body }}</p>
+          <p class="engine-owner">{{ s.owner }}</p>
+        </li>
+      </sc-for>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- Inbound. The one number on this section is the quote, because the quote -->
+<!-- is what the reader is being asked to picture approving.                 -->
+<!-- ===================================================================== -->
+<section class="sec">
+  <div class="wrap split split-wide-left">
+    <div data-reveal>
+      <h2 class="h2 head">Inbound requests stop falling through the cracks.</h2>
+      <p class="body" style="margin-top: 20px;">A catering request that arrives at 4:45 on a Friday usually waits until Monday. By then the office manager has ordered from someone else.</p>
+      <p class="body" style="margin-top: 14px;">Kutlerri answers, gathers what a kitchen actually needs (headcount, dietary notes, delivery window, setup) and returns a quote for approval. Then it keeps following up until the order is placed or the buyer says no.</p>
+    </div>
+
+    <div class="card" style="padding: 0; overflow: hidden;">
+      <div class="demo-bar">
+        <p class="h4">Inbound request</p>
+        <span class="chip-quiet chip">Friday, 4:47 PM</span>
+      </div>
+      <div style="padding: 20px; display: grid; gap: 12px;">
+        <div class="card card-quiet" style="padding: 15px 17px;">
+          <p class="tiny">Harbor Point Legal, Diane R.</p>
+          <p style="font-size: 15px; line-height: 1.45; margin-top: 6px;">“Do you cater? We need lunch for about 40 people on the 18th.”</p>
+        </div>
+        <div class="card card-tint" style="padding: 15px 17px;">
+          <p class="tiny" style="color: var(--accent);">Kutlerri replied at 4:48 PM</p>
+          <p style="font-size: 15px; line-height: 1.5; margin-top: 6px; color: var(--accent);">Confirmed headcount, two vegetarian meals, 11:30 delivery, setup included. Quote drafted from your catering menu.</p>
+        </div>
+        <div class="card" style="padding: 17px;">
+          <div class="between" style="align-items: baseline;">
+            <p class="small">Quote ready for approval</p>
+            <p class="num" style="font-size: 24px;">$620</p>
+          </div>
+          <div class="row" style="margin-top: 14px; gap: 10px;">
+            <button type="button" class="btn btn-primary btn-sm" sc-camel-on-click="{{ approveQuote }}">{{ quoteLabel }}</button>
+            <button type="button" class="btn btn-ghost btn-sm">Edit quote</button>
+          </div>
+          <sc-if value="{{ quoteSent }}" hint-placeholder-val="{{ false }}">
+            <p class="small" style="color: var(--accent); margin-top: 12px; animation: k-rise .3s ease-out both;">Quote sent. Follow-up scheduled for Tuesday morning.</p>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- Accounts, not orders. Two contrasting states of the same relationship.  -->
+<!-- ===================================================================== -->
+<section class="sec sunk">
+  <div class="wrap">
+    <div class="narrow" data-reveal>
+      <h2 class="h2">One order is a transaction. The account is the revenue.</h2>
+      <p class="body" style="margin-top: 20px;">Most catering value sits in businesses that have already ordered once. The agent works the cadence so that the second order is not an accident.</p>
+    </div>
+
+    <div class="lanes" style="margin-top: clamp(28px, 3.5vw, 40px);">
+      <div class="lane">
+        <p class="h4">Horizon Health orders every other Thursday.</p>
+        <p class="small">Kutlerri reaches out two days ahead with the same menu and a one-tap reorder, before the office manager starts looking elsewhere.</p>
+      </div>
+      <div class="lane">
+        <p class="h4">Kestrel Software has gone quiet.</p>
+        <p class="small">Previously a monthly account. Flagged for a manager to call, rather than another automated email that gets ignored.</p>
+      </div>
+      <div class="lane lane-mid">
+        <p class="h4">Both land on one pipeline.</p>
+        <p class="small">You see what is booked, what is quoted and what is slipping, per store, without anyone building a spreadsheet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- Customer story. The full version lives here; the home page links in.    -->
+<!-- ===================================================================== -->
+<section class="sec" id="rasa">
+  <div class="wrap">
+    <div class="panel">
+      <div class="split split-wide-left" style="align-items: center;">
+        <div>
+          <h2 class="h2" style="max-width: 18ch;">From waiting for catering orders to going after them.</h2>
+          <p class="body" style="margin-top: 20px; max-width: 42ch;">RASA had catering demand and no way to chase it. Kutlerri mapped the market around each store, worked the prospects and kept the follow-up alive.</p>
+
+          <div style="margin-top: 32px; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;">
+            <span class="num" style="font-size: clamp(44px, 5.5vw, 64px); line-height: 1; color: var(--panel-ink);">+31%</span>
+            <span class="body" style="color: var(--panel-ink-2);">catering revenue over six months, with no new sales hire, no paid ads and no discounting</span>
+          </div>
+        </div>
+
+        <div class="grid cols-2" style="gap: 14px;">
+          <div style="border: 1px solid var(--panel-line); border-radius: var(--r-md); padding: 20px;">
+            <p class="small" style="color: var(--panel-ink-2);">Before</p>
+            <div class="lane-list" style="margin-top: 10px; color: var(--panel-ink);">
+              <span>Inbound only</span>
+              <span>No outbound pipeline</span>
+              <span>Follow-up when someone remembered</span>
+              <span>No catering salesperson</span>
+            </div>
+          </div>
+          <div style="border: 1px solid var(--panel-line); border-radius: var(--r-md); padding: 20px; background: rgba(255,255,255,.06);">
+            <p class="small" style="color: var(--panel-ink-2);">With Kutlerri</p>
+            <div class="lane-list" style="margin-top: 10px; color: var(--panel-ink);">
+              <span>Target market mapped</span>
+              <span>Prospects worked weekly</span>
+              <span>Follow-ups handled</span>
+              <span>Pipeline you can see</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- FAQ.                                                                   -->
+<!-- ===================================================================== -->
+<section class="sec sunk" id="faq">
+  <div class="wrap" style="max-width: 840px;">
+    <h2 class="h2" data-reveal>Catering questions.</h2>
+    <div style="margin-top: clamp(24px, 3vw, 36px);">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+        <div class="faq-item">
+          <button type="button" class="faq-q" aria-expanded="{{ f.open }}" sc-camel-on-click="{{ f.toggle }}">
+            <span>{{ f.q }}</span>
+            <span class="faq-sign" aria-hidden="true" data-open="{{ f.open }}">+</span>
+          </button>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+            <p class="faq-a body">{{ f.a }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<section class="band" id="start">
+  <div class="wrap split" style="align-items: center;">
+    <div>
+      <h2 class="h2">There are businesses ordering lunch near your stores this week.</h2>
+      <p class="body" style="margin-top: 18px;">Let us show you who they are, and what the first month of pipeline would look like.</p>
+    </div>
+    <div class="stack g16" style="justify-items: start;">
+      <a href="contact.html" class="btn btn-primary">Find my opportunities <span class="btn-orb" aria-hidden="true">&rarr;</span></a>
+      <p class="small" style="color: var(--panel-ink-2);">Fully managed. Our team runs the outreach and the follow-through with you.</p>
+    </div>
+  </div>
+</section>
