@@ -18,6 +18,7 @@ const path = require('path');
 const SRC = __dirname;
 const ROOT = path.join(SRC, '..');
 const TEMPLATE_LINE = 389; // zero-indexed; line 390 in an editor
+const SITE_URL = 'https://vrajnotviraj.github.io/kutlerri';
 
 const read = (f) => fs.readFileSync(path.join(SRC, f), 'utf8');
 
@@ -29,24 +30,28 @@ const FOOTER = read('footer.html');
 const PAGES = [
   {
     file: 'index.html',
+    path: '/',
     nav: null,
     title: 'Kutlerri, AI agents for restaurant P&amp;Ls',
     description: 'Kutlerri finds revenue opportunities, cuts avoidable costs and helps execute the work across catering, food, labor and expansion. Built for multi-location restaurant operators.'
   },
   {
     file: 'catering.html',
+    path: '/catering.html',
     nav: 'catering',
     title: 'Catering Agent, Kutlerri',
     description: 'Kutlerri maps catering demand around every restaurant, finds the buyers who order lunch and runs the outreach and follow-up that turns them into recurring accounts.'
   },
   {
     file: 'about.html',
+    path: '/about.html',
     nav: 'about',
     title: 'About Kutlerri, making restaurant profit less random',
     description: 'Why we built Kutlerri: restaurant operators have more data than ever, and the most expensive decisions still end with "I think."'
   },
   {
     file: 'contact.html',
+    path: '/contact.html',
     nav: null,
     title: 'Talk to Kutlerri',
     description: 'Tell us the restaurant and we will come back with the P&amp;L levers worth working on first, and how we would measure them.'
@@ -131,6 +136,11 @@ ${motion}
 <helmet>
 <title>${spec.title}</title>
 <meta name="description" content="${spec.description}">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="${SITE_URL}${spec.path}">
+<link rel="alternate" type="text/markdown" href="${SITE_URL}/llms.txt" title="Kutlerri AI summary">
+<link rel="alternate" type="text/markdown" href="${SITE_URL}/ai-context.md" title="Kutlerri AI product context">
+<link rel="sitemap" type="application/xml" href="${SITE_URL}/sitemap.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 ${fontBlock(bundle.template, spec.file)}

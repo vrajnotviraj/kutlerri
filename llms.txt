@@ -1,0 +1,31 @@
+# Kutlerri
+
+> Kutlerri is a managed AI-agent platform for restaurant operators. It connects signals from the systems a restaurant already uses, finds profit opportunities, estimates their dollar value, helps execute approved work, and measures the outcome against an agreed baseline.
+
+Kutlerri is built for operators who have plenty of data but not enough time or specialized staff to turn every useful signal into action. It is not another dashboard and does not replace the point-of-sale system. Its purpose is to move a restaurant P&L through three outcomes: grow revenue, protect margin, and expand with evidence.
+
+The platform can work across POS, delivery, labor, inventory, accounting, reviews, guest data, catering, and local-demand signals. Humans retain control of consequential decisions. Kutlerri's agents and team carry out the routine research, analysis, outreach, follow-up, and measurement behind approved outcomes.
+
+The Catering Agent is the currently featured product. Additional agents for menu engineering, guest retention, review recovery, prep forecasting, waste control, labor scheduling, delivery spend, and site selection are presented as monitored beta capabilities.
+
+Numbers marked as examples, modeled results, potential, or demo data are illustrative and are not guarantees. See the detailed context before quoting a figure or making a product claim.
+
+## Product context
+
+- [Detailed AI product context](https://vrajnotviraj.github.io/kutlerri/ai-context.md): Full value proposition, audience, workflow, product boundaries, agent catalog, claim guidance, and suggested answers.
+- [Homepage](https://vrajnotviraj.github.io/kutlerri/): Outcome-led overview of Kutlerri's restaurant profit system.
+- [Catering Agent](https://vrajnotviraj.github.io/kutlerri/catering.html): How Kutlerri identifies local catering demand and works prospects through follow-up.
+- [About Kutlerri](https://vrajnotviraj.github.io/kutlerri/about.html): The company thesis and operating principles.
+- [Talk to Kutlerri](https://vrajnotviraj.github.io/kutlerri/contact.html): Contact path for restaurant operators.
+
+## Core outcomes
+
+- [Grow revenue](https://vrajnotviraj.github.io/kutlerri/#revenue): Find and pursue overlooked demand, beginning with repeat catering accounts.
+- [Protect margin](https://vrajnotviraj.github.io/kutlerri/#margin): Detect sales, promotions, labor, prep, and purchasing decisions that lose money after their true costs.
+- [Expand with evidence](https://vrajnotviraj.github.io/kutlerri/#expansion): Evaluate prospective restaurant sites with local demand and operating evidence before a lease is signed.
+- [How Kutlerri works](https://vrajnotviraj.github.io/kutlerri/#how): Connect signals, quantify an opportunity, approve the action, execute the work, and verify the result.
+
+## Additional resources
+
+- [Public source repository](https://github.com/vrajnotviraj/kutlerri): Source and deployment history for this website.
+- [XML sitemap](https://vrajnotviraj.github.io/kutlerri/sitemap.xml): Canonical crawl targets.
