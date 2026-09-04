@@ -19,6 +19,8 @@ const SRC = __dirname;
 const ROOT = path.join(SRC, '..');
 const TEMPLATE_LINE = 389; // zero-indexed; line 390 in an editor
 const SITE_URL = 'https://vrajnotviraj.github.io/kutlerri';
+const SOCIAL_IMAGE = `${SITE_URL}/public/kutlerri-restaurant-profit-hero-v2.png`;
+const SOCIAL_IMAGE_ALT = 'A restaurant dining room and kitchen connected by Kutlerri profit signals';
 
 const read = (f) => fs.readFileSync(path.join(SRC, f), 'utf8');
 
@@ -32,8 +34,8 @@ const PAGES = [
     file: 'index.html',
     path: '/',
     nav: null,
-    title: 'Kutlerri, the fully managed AI profit team for restaurant groups',
-    description: 'Kutlerri finds revenue and margin opportunities hiding across restaurant systems, then does the work to capture them without another dashboard for your team.'
+    title: 'Kutlerri: More profit from every restaurant',
+    description: 'Kutlerri is a fully managed AI profit team for restaurant groups. We find overlooked revenue and margin opportunities, run the work to capture them, and measure the result.'
   },
   {
     file: 'catering.html',
@@ -101,6 +103,14 @@ function fontBlock(template, file) {
   return m[0];
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&(?!(?:amp|lt|gt|quot|#39);)/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 // ---------------------------------------------------------------------------
 // Composition
 // ---------------------------------------------------------------------------
@@ -123,6 +133,10 @@ function page(bundle, spec) {
     ? '<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>\n<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>'
     : '';
 
+  const pageUrl = `${SITE_URL}${spec.path}`;
+  const title = escapeHtml(spec.title);
+  const description = escapeHtml(spec.description);
+
   return `<!DOCTYPE html>
 <html><head>
 <meta charset="utf-8">
@@ -134,10 +148,27 @@ ${motion}
 <body>
 <x-dc>
 <helmet>
-<title>${spec.title}</title>
-<meta name="description" content="${spec.description}">
+<title>${title}</title>
+<meta name="description" content="${description}">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<link rel="canonical" href="${SITE_URL}${spec.path}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kutlerri">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${description}">
+<meta property="og:url" content="${pageUrl}">
+<meta property="og:image" content="${SOCIAL_IMAGE}">
+<meta property="og:image:secure_url" content="${SOCIAL_IMAGE}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1536">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:alt" content="${SOCIAL_IMAGE_ALT}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${title}">
+<meta name="twitter:description" content="${description}">
+<meta name="twitter:image" content="${SOCIAL_IMAGE}">
+<meta name="twitter:image:alt" content="${SOCIAL_IMAGE_ALT}">
+<link rel="image_src" href="${SOCIAL_IMAGE}">
+<link rel="canonical" href="${pageUrl}">
 <link rel="alternate" type="text/markdown" href="${SITE_URL}/llms.txt" title="Kutlerri AI summary">
 <link rel="alternate" type="text/markdown" href="${SITE_URL}/ai-context.md" title="Kutlerri AI product context">
 <link rel="sitemap" type="application/xml" href="${SITE_URL}/sitemap.xml">
